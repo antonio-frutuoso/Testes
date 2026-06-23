@@ -345,6 +345,12 @@ $se10Main = @"
 ' ===== SE10: criar/incluir requests de Customizing =====
 Dim gFoundId
 
+' Fecha quaisquer popups modais remanescentes antes de navegar.
+Do While session.Children.Count > 1
+   session.findById("wnd[1]").sendVKey 12
+   WScript.Sleep 300
+Loop
+Err.Clear
 session.findById("wnd[0]").maximize
 ' ===== Abrir transacao SE10 =====
 session.findById("wnd[0]/tbar[0]/okcd").text = "/nSE10"
@@ -385,9 +391,28 @@ Sub CriarOrdem(descr)
    On Error Resume Next
    session.findById("wnd[0]/tbar[1]/btn[6]").press
    If Err.Number <> 0 Then Falha "abrir dialogo criar request (" & descr & ")"
-   ' Se o SAP abrir dialogo de selecao de TIPO de request antes da descricao,
-   ' selecione o tipo Customizing aqui antes de preencher AS4TEXT.
+   Err.Clear
+
+   ' Em SE10 o botao criar abre PRIMEIRO um popup de selecao de TIPO de request
+   ' (radio "Ordem customizing" vs "Ordem de workbench"); so depois vem a tela
+   ' de descricao. Selecionar Customizing e confirmar (btn[0]).
+   If Not session.findById("wnd[1]/usr/radKO042-REQ_CUST_W", False) Is Nothing Then
+      session.findById("wnd[1]/usr/radKO042-REQ_CUST_W").select
+      session.findById("wnd[1]/tbar[0]/btn[0]").press
+      Err.Clear
+   End If
+
+   ' Aguarda a tela de descricao (campo AS4TEXT) aparecer.
+   Dim tCri
+   For tCri = 1 To 20
+      If Not session.findById("wnd[1]/usr/txtKO013-AS4TEXT", False) Is Nothing Then Exit For
+      WScript.Sleep 250
+   Next
+   If session.findById("wnd[1]/usr/txtKO013-AS4TEXT", False) Is Nothing Then Falha "campo de descricao nao apareceu (" & descr & ")"
+
    session.findById("wnd[1]/usr/txtKO013-AS4TEXT").text = descr
+   If Err.Number <> 0 Then Falha "preencher descricao (" & descr & ")"
+   Err.Clear
    session.findById("wnd[1]/tbar[0]/btn[0]").press
    If Err.Number <> 0 Then Falha "gravar request (" & descr & ")"
    Err.Clear
@@ -398,11 +423,16 @@ End Sub
 
 Sub SelecionarOrdemPorDescricao(descr)
    On Error Resume Next
-   ' Atualiza a lista para refletir as requests recem-criadas.
-   session.findById("wnd[0]/tbar[1]/btn[42]").press
-   Err.Clear
-   gFoundId = ""
-   BuscarLabel session.findById("wnd[0]/usr"), descr
+   ' As requests recem-criadas ja aparecem na lista; NAO usar btn[42] (refresh)
+   ' aqui: ele dispara um re-render assincrono que esvazia a arvore de labels no
+   ' instante da busca e faz BuscarLabel falhar. Em vez disso, busca com retry.
+   Dim tSel
+   For tSel = 1 To 10
+      gFoundId = ""
+      BuscarLabel session.findById("wnd[0]/usr"), descr
+      If gFoundId <> "" Then Exit For
+      WScript.Sleep 500
+   Next
    If gFoundId = "" Then
       WScript.Echo "ERRO: request com descricao '" & descr & "' nao encontrada na lista."
       WScript.Quit 1

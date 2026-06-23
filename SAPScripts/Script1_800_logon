@@ -1,0 +1,48 @@
+If Not IsObject(application) Then
+   Set SapGuiAuto  = GetObject("SAPGUI")
+   Set application = SapGuiAuto.GetScriptingEngine
+End If
+If Not IsObject(connection) Then
+   Set connection = application.Children(0)
+End If
+If Not IsObject(session) Then
+   Set session    = connection.Children(0)
+End If
+If IsObject(WScript) Then
+   WScript.ConnectObject session,     "on"
+   WScript.ConnectObject application, "on"
+End If
+session.findById("wnd[0]").maximize
+session.findById("wnd[0]/usr/txtRSYST-MANDT").text = "800"
+session.findById("wnd[0]/usr/txtRSYST-BNAME").text = "afrutuoso"
+session.findById("wnd[0]/usr/pwdRSYST-BCODE").text = "********"
+session.findById("wnd[0]/usr/pwdRSYST-BCODE").setFocus
+session.findById("wnd[0]/usr/pwdRSYST-BCODE").caretPosition = 8
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/tbar[0]/okcd").text = "SE01"
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/tabsMAINTABSTRIP/tabpTSCM/ssubCOMMONSUBSCREEN:RDDM0001:0220/chkTRDYSE01CM-REQ_CUST").selected = false
+session.findById("wnd[0]/usr/tabsMAINTABSTRIP/tabpTSCM/ssubCOMMONSUBSCREEN:RDDM0001:0220/chkTRDYSE01CM-REQ_CUST").setFocus
+session.findById("wnd[0]/usr/tabsMAINTABSTRIP/tabpTSCM/ssubCOMMONSUBSCREEN:RDDM0001:0220/btn%_AUTOTEXT028").press
+session.findById("wnd[0]/usr/sub/1[0,0]/sub/1/2[0,1]/sub/1/2/3[0,3]/sub/1/2/3/7[0,11]/sub/1/2/3/7/12[0,19]/sub/1/2/3/7/12/14[0,22]/lbl[20,22]").setFocus
+session.findById("wnd[0]/usr/sub/1[0,0]/sub/1/2[0,1]/sub/1/2/3[0,3]/sub/1/2/3/7[0,11]/sub/1/2/3/7/12[0,19]/sub/1/2/3/7/12/14[0,22]/lbl[20,22]").caretPosition = 5
+session.findById("wnd[0]/tbar[1]/btn[6]").press
+session.findById("wnd[1]/usr/txtKO013-AS4TEXT").text = "MSAF - INTERFACE NAMESPACE MSAF V4125"
+session.findById("wnd[1]/tbar[0]/btn[0]").press
+session.findById("wnd[0]/usr/sub/1[0,0]/sub/1/2[0,1]/sub/1/2/3[0,3]/sub/1/2/3/7[0,11]/sub/1/2/3/7/8[0,13]/sub/1/2/3/7/8/9[0,15]/lbl[20,15]").setFocus
+session.findById("wnd[0]/usr/sub/1[0,0]/sub/1/2[0,1]/sub/1/2/3[0,3]/sub/1/2/3/7[0,11]/sub/1/2/3/7/8[0,13]/sub/1/2/3/7/8/9[0,15]/lbl[20,15]").caretPosition = 6
+session.findById("wnd[0]/tbar[1]/btn[35]").press
+session.findById("wnd[1]/usr/ctxtDV_0100_SOURCE_REQUEST").text = "TRQK901244"
+session.findById("wnd[1]/usr/ctxtDV_0100_SOURCE_REQUEST").caretPosition = 10
+session.findById("wnd[1]/tbar[0]/btn[0]").press
+session.findById("wnd[0]/usr/sub/1[0,0]/sub/1/2[0,1]/sub/1/2/3[0,3]/sub/1/2/3/7[0,11]/sub/1/2/3/7/13[0,20]/sub/1/2/3/7/13/14[0,22]/lbl[20,22]").setFocus
+session.findById("wnd[0]/usr/sub/1[0,0]/sub/1/2[0,1]/sub/1/2/3[0,3]/sub/1/2/3/7[0,11]/sub/1/2/3/7/13[0,20]/sub/1/2/3/7/13/14[0,22]/lbl[20,22]").caretPosition = 8
+session.findById("wnd[0]/tbar[1]/btn[6]").press
+session.findById("wnd[1]/usr/txtKO013-AS4TEXT").text = "MSAF - PACOTE WEBSERVICE MSAF V4125"
+session.findById("wnd[1]/tbar[0]/btn[0]").press
+session.findById("wnd[0]/usr/sub/1[0,0]/sub/1/2[0,1]/sub/1/2/3[0,3]/sub/1/2/3/7[0,11]/sub/1/2/3/7/8[0,13]/sub/1/2/3/7/8/9[0,15]/lbl[20,15]").setFocus
+session.findById("wnd[0]/usr/sub/1[0,0]/sub/1/2[0,1]/sub/1/2/3[0,3]/sub/1/2/3/7[0,11]/sub/1/2/3/7/8[0,13]/sub/1/2/3/7/8/9[0,15]/lbl[20,15]").caretPosition = 6
+session.findById("wnd[0]/tbar[1]/btn[35]").press
+session.findById("wnd[1]/usr/ctxtDV_0100_SOURCE_REQUEST").text = "TRQK901246"
+session.findById("wnd[1]/usr/ctxtDV_0100_SOURCE_REQUEST").caretPosition = 10
+session.findById("wnd[1]/tbar[0]/btn[0]").press

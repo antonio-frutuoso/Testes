@@ -1,0 +1,13 @@
+Criar uma skill para execução dos passos abaixo:
+Etapas a serem executadas no ambiente SAP TDD/700.
+Efetuar logon no ambiente TDD/700 utilizando o SapScript; 
+C:\Users\6121358\SAPScripts\Script1_logon
+Solicitar usuário e senha
+Abrir a transação SE10 executando o SapScript;
+C:\Users\6121358\SAPScripts\Script1_SE10
+Criar a request de customizing de instalação do pacote atual da interface Namespace 
+Solicitar a inserção da request de customizing de INSTALAÇÃO anterior na nova request customizing de INSTALAÇÃO do pacote da interface Namespace.
+Solicitar a inserção da request de customizing COM NOVOS AJUSTE se houverem (Perguntar) na nova request customizing de INSTALAÇÃO do pacote da interface Namespace.
+Criar a request de customizing de ATUALIZAÇÃO do pacote atual da interface Namespace 
+Solicitar a inserção da request de customizing de ATUALIZAÇÃO anterior na nova request customizing de ATUALIZAÇÃO do pacote atual da interface Namespace.
+Solicitar a inserção da request de customizing COM NOVOS AJUSTE se houverem (Perguntar) na nova request customizing de atualização do pacote da interface Namespace.

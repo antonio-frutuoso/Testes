@@ -60,10 +60,10 @@ reutilizada nas duas etapas.
 | # | Dado | Obrigatorio | Default / Exemplo |
 |---|------|-------------|-------------------|
 | 6 | **Versao do pacote** | Sim | `v4126` |
-| 7 | **Descricao da request de INSTALACAO** | Nao | `MSAF - Customizing INSTALACAO Namespace v4126` |
+| 7 | **Descricao da request de INSTALACAO** | Nao | `MSAF - Instalação Pacote Tabelas de Controle v4126` |
 | 8 | **Request INSTALACAO anterior** | Sim | `TDDK905001` |
 | 9 | **Ha ajustes para INSTALACAO?** (S/N) | Nao | N → *(se S, numeros das requests)* `TDDK905010` |
-| 10 | **Descricao da request de ATUALIZACAO** | Nao | `MSAF - Customizing ATUALIZACAO Namespace v4126` |
+| 10 | **Descricao da request de ATUALIZACAO** | Nao | `MSAF - Atualização Pacote Tabelas de Controle v4126` |
 | 11 | **Request ATUALIZACAO anterior** | Sim | `TDDK905002` |
 | 12 | **Ha ajustes para ATUALIZACAO?** (S/N) | Nao | N → *(se S, numeros das requests)* `TDDK905020` |
 
